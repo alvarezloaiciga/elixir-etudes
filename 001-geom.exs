@@ -1,6 +1,22 @@
 defmodule Geom do
-  def area(x \\ 1, y \\ 1) do
-    x * y
+  @moduledoc """
+  Functions for calculating areas of geometric shapes.
+
+  from *Études for Elixir*, O'Reilly Media, Inc., 2013.
+  Copyright 2015 by Jose Alvarez.
+  """
+  @vsn 0.1
+
+  @doc """
+  Calculates the area of a rectangle, given the length and width.
+  Returns the product of its arguments. The default value for
+  both arguments is 1.
+  """
+
+  @spec area(number(), number()) :: number()
+
+  def area(length \\ 1, width \\ 1) do
+    length * width
   end
 end
 
@@ -13,12 +29,12 @@ defmodule GeomTest do
 
   import Geom, only: [area: 2]
 
-  test "area with height and width" do
+  test "area with length and width" do
     assert Geom.area(3, 4) == 12
     assert Geom.area(12, 7) == 84
   end
 
-  test "area with only heigth" do
+  test "area with only length" do
     assert Geom.area(12) == 12
   end
 
