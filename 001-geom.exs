@@ -1,5 +1,5 @@
 defmodule Geom do
-  def area(x, y) do
+  def area(x \\ 1, y \\ 1) do
     x * y
   end
 end
@@ -13,8 +13,16 @@ defmodule GeomTest do
 
   import Geom, only: [area: 2]
 
-  test "area" do
+  test "area with height and width" do
     assert Geom.area(3, 4) == 12
     assert Geom.area(12, 7) == 84
+  end
+
+  test "area with only heigth" do
+    assert Geom.area(12) == 12
+  end
+
+  test "area with no params" do
+    assert Geom.area() == 1
   end
 end
