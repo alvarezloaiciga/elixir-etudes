@@ -10,6 +10,10 @@ defmodule Geom do
   def area(:ellipse, major_radius, minor_radius) when major_radius > 0 and minor_radius > 0 do
     :math.pi() * major_radius * minor_radius
   end
+
+  def area(_, _, _) do
+    0
+  end
 end
 
 ExUnit.start
@@ -29,33 +33,23 @@ defmodule GeomTest do
     assert Geom.area(:ellipse, 2, 4) == 25.132741228718345
   end
 
-  test "it does not accept negative numbers for rectangle" do
-    assert_raise FunctionClauseError, fn ->
-      Geom.area(:rectangle, -3, 4)
-    end
-
-    assert_raise FunctionClauseError, fn ->
-      Geom.area(:rectangle, 3, -4)
-    end
+  test "returns 0 when negative attributes are passed for rectangle" do
+    assert Geom.area(:rectangle, -3, 4) == 0
+    assert Geom.area(:rectangle, 3, -4) == 0
   end
 
-  test "it does not accept negative numbers for triangle" do
-    assert_raise FunctionClauseError, fn ->
-      Geom.area(:triangle, -3, 4)
-    end
-
-    assert_raise FunctionClauseError, fn ->
-      Geom.area(:triangle, 3, -4)
-    end
+  test "returns 0 when negative attributes are passed for triangle" do
+    assert Geom.area(:triangle, -3, 4) == 0
+    assert Geom.area(:triangle, 3, -4) == 0
   end
 
-  test "it does not accept negative numbers for ellipse" do
-    assert_raise FunctionClauseError, fn ->
-      Geom.area(:ellipse, -3, 4)
-    end
+  test "returns 0 when negative attributes are passed for ellipse" do
+    assert Geom.area(:ellipse, -3, 4) == 0
+    assert Geom.area(:ellipse, 3, -4) == 0
+  end
 
-    assert_raise FunctionClauseError, fn ->
-      Geom.area(:ellipse, 3, -4)
-    end
+  test "returns 0 when unkown shape is passed as attribute" do
+    assert Geom.area(:weird_shape, 2, 4) == 0
+    assert Geom.area(:box, 2, 4) == 0
   end
 end
